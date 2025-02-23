@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enhanced Image</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        .image-box img {
+            width: 300px;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <a href="/">Home</a>
+    </div>
+    <div class="container">
+        <h1>Enhanced Image</h1>
+        <div class="image-container">
+            <div class="image-box">
+                <h2>Original Image</h2>
+                <img src="{{ url_for('static', filename=original_image_path) }}" alt="Original Image">
+            </div>
+            <div class="image-box">
+                <h2>Enhanced Image</h2>
+                <img src="{{ url_for('static', filename=enhanced_image_path) }}" alt="Enhanced Image">
+            </div>
+        </div>
+        <a href="{{ url_for('download', filename=enhanced_image_path) }}" class="button">Download Enhanced Image</a>
+    </div>
+</body>
+</html>
