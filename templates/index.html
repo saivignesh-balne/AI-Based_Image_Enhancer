@@ -3,19 +3,102 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Real-ESRGAN Image Enhancement</title>
+    <title>Neural Novas Art Enhancement</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        body {
+            background-image: url('{{ url_for('static', filename='background.jpg') }}');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            margin-top: 100px; /* Add margin to avoid content overlap with fixed navbar */
+        }
+        .navbar {
+            background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white */
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+        .navbar a {
+            color: #000;
+            text-decoration: none;
+            padding: 10px;
+            font-size: 20px; /* Adjust the size */
+            font-weight: bold; /* Make it bold */
+        }
+        .container {
+            background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white */
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            margin-top: 20px; /* Add margin to avoid content overlap with fixed navbar */
+        }
+        .section {
+            margin-bottom: 50px;
+        }
+        .image-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .image-box {
+            margin: 10px;
+        }
+        .image-box img {
+            width: 200px;
+        }
+    </style>
 </head>
 <body>
     <div class="navbar">
-        <a href="/">Home</a>
+        <div>
+            <a href="/">Home</a>
+            <a href="/upload">Art Upload</a>
+            <a href="#about">About</a>
+            <a href="#feedback">Feedback</a>
+            <a href="#contact">Contact</a>
+        </div>
     </div>
-    <div class="container">
-        <h1>Real-ESRGAN Image Enhancement</h1>
-        <form action="/upload" method="post" enctype="multipart/form-data">
-            <input type="file" name="image" accept="image/*" required>
-            <button type="submit">Upload and Enhance</button>
-        </form>
+    <div class="content">
+        <div class="container section">
+            <h1>Art Enhancement</h1>
+            <div class="image-container">
+                <div class="image-box">
+                    <h2>Original Image</h2>
+                    <img src="{{ url_for('static', filename='example_original.png') }}" alt="Original Image">
+                </div>
+                <div class="image-box">
+                    <h2>Enhanced Image</h2>
+                    <img src="{{ url_for('static', filename='example_enhanced.png') }}" alt="Enhanced Image">
+                </div>
+            </div>
+        </div>
+        <div class="container section" id="about">
+            <h1>About</h1>
+            <p>Welcome to Neural Novas Art Enhancement service. Our mission is to provide state-of-the-art art enhancement solutions using the latest advancements in deep learning and artificial intelligence. Our team of experts, including Balne Sai Vignesh, Juluri Rahul, and Thota Sumanth, has developed a powerful tool that can upscale and enhance the quality of your artwork, making it look sharper and more detailed.</p>
+            <p>Neural Novas leverages cutting-edge technology to improve the resolution and quality of artwork. Whether you are an artist, graphic designer, or just someone who wants to enhance their personal art pieces, our service is designed to meet your needs.</p>
+            <p>Our tool is easy to use and delivers fast results. Simply upload your artwork, and our system will process it using our advanced algorithms to produce an enhanced version. We are committed to providing the best possible service and continuously improving our technology to stay ahead of the curve.</p>
+        </div>
+        <div class="container section" id="feedback">
+            <h1>Feedback</h1>
+            <p>We value your feedback and are always looking for ways to improve our service. If you have any suggestions, comments, or questions, please do not hesitate to reach out to us. Your input is crucial in helping us enhance our tool and provide a better experience for all our users.</p>
+            <p>You can provide feedback through our contact form or by sending us an email. We appreciate your time and effort in helping us make our service better. Thank you for choosing Neural Novas Art Enhancement service.</p>
+        </div>
+        <div class="container section" id="contact">
+            <h1>Contact</h1>
+            <p>If you have any questions or need assistance, please feel free to contact us. Our team is here to help you with any issues you may encounter or to provide more information about our service.</p>
+            <p>You can reach us through the following channels:</p>
+            <ul>
+                <li>Email: support@neuralnovas.com</li>
+                <li>Phone: +91 9030683889</li>
+                <li>Address: Hyderabad, Telangana, India</li>
+            </ul>
+            <p>We look forward to hearing from you and assisting you with your art enhancement needs.</p>
+        </div>
     </div>
 </body>
 </html>

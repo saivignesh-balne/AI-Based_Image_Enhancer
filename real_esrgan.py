@@ -31,4 +31,5 @@ def enhance_image(image_path, upsampler):
     # Save the enhanced image
     output_path = os.path.join('static', os.path.basename(image_path).replace('.png', '_enhanced.png'))
     cv2.imwrite(output_path, output)
+    
     return os.path.basename(output_path)

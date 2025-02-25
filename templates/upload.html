@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Image</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        body {
+            background-image: url('{{ url_for('static', filename='background.jpg') }}');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100vh;
+        }
+        .navbar {
+            background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white */
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+        .navbar a {
+            color: #000;
+            text-decoration: none;
+            padding: 10px;
+            font-size: 20px; /* Adjust the size */
+            font-weight: bold; /* Make it bold */
+        }
+        .container {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            transition: margin-top 0.5s ease-in-out;
+        }
+        .image-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .image-box {
+            margin: 10px;
+        }
+        .image-box img {
+            width: 300px;
+        }
+        .file-upload {
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+        }
+        .file-upload input[type="file"] {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            cursor: pointer;
+        }
+        .chosen-file {
+            margin-top: 10px;
+            font-size: 16px;
+            color: #333;
+        }
+        .chosen-image {
+            margin-top: 10px;
+            max-width: 300px;
+            max-height: 300px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <div>
+            <a href="/">Home</a>
+            <a href="/upload">Art Upload</a>
+            <a href="/#about">About</a>
+            <a href="/#feedback">Feedback</a>
+            <a href="/#contact">Contact</a>
+        </div>
+    </div>
+
+    <!-- Initially set margin-top to 400px -->
+    <div class="container" id="UploadContainer" style="margin-top: 0px;">
+        <h1>Upload Image</h1>
+        <form action="/upload" method="post" enctype="multipart/form-data" onsubmit="return changeMargin()">
+            <div class="file-upload">
+                <span>Choose File</span>
+                <input type="file" name="image" accept="image/*" required onchange="showChosenFile(event)">
+            </div>
+            <div class="chosen-file" id="chosenFile"></div>
+            <img id="chosenImage" class="chosen-image" alt="Chosen Image">
+            <button type="submit">Upload and Enhance</button>
+        </form>
+    </div>
+
+    {% if original_image_path and enhanced_image_path %}
+    <script>
+        // Reduce margin-top to 0 when an enhanced image is available
+        document.addEventListener("DOMContentLoaded", function () {
+            document.getElementById("UploadContainer").style.marginTop = "400px";
+        });
+    </script>
+    <div class="container" style="margin-top: 20px;">
+        <h1>Enhanced Image</h1>
+        <div class="image-container">
+            <div class="image-box">
+                <h2>Original Image</h2>
+                <img src="{{ url_for('static', filename=original_image_path) }}" alt="Original Image">
+            </div>
+            <div class="image-box">
+                <h2>Enhanced Image</h2>
+                <img src="{{ url_for('static', filename=enhanced_image_path) }}" alt="Enhanced Image">
+            </div>
+        </div>
+        <a href="{{ url_for('download', filename=enhanced_image_path) }}" class="button">Download Enhanced Image</a>
+    </div>
+    {% endif %}
+
+    <script>
+        function changeMargin() {
+            document.getElementById("UploadContainer").style.marginTop = "400px";
+            return true; // Allow form submission
+        }
+
+        function showChosenFile(event) {
+            const input = event.target;
+            const chosenFile = document.getElementById("chosenFile");
+            const chosenImage = document.getElementById("chosenImage");
+
+            chosenFile.textContent = `Chosen file: ${input.files[0].name}`;
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                chosenImage.src = e.target.result;
+                chosenImage.style.display = 'block';
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+    </script>
+</body>
+</html>
