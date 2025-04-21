@@ -40,9 +40,9 @@
    ```
    if that doesn't work try
    ```bash
-   pip install torch==1.8.1+cu111 torchvision==0.9.1+cu111 -f https://download.pytorch.org/whl/torch_stable.html
-   pip install basicsr==1.3.4.9
-   pip install opencv-python streamlit Pillow numpy
+   pip install torch==2.3.1+cu121 torchvision==0.20.1+cu121 -f https://download.pytorch.org/whl/torch_stable.html
+   pip install basicsr==2.1.3
+   pip install Pillow
    ```
 
 ---
