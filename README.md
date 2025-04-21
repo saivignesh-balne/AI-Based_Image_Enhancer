@@ -37,7 +37,13 @@
 3. **Install dependencies**:  
    ```bash  
    pip install -r requirements.txt  
-   ```  
+   ```
+   if that doesn't work try
+   ```bash
+   pip install torch==1.8.1+cu111 torchvision==0.9.1+cu111 -f https://download.pytorch.org/whl/torch_stable.html
+   pip install basicsr==1.3.4.9
+   pip install opencv-python streamlit Pillow numpy
+   ```
 
 ---
 
